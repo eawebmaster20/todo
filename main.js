@@ -68,4 +68,76 @@ function clearInput() {
     document.getElementById('description').value='';
 }
 
+
+document.getElementById('title').addEventListener('keydown',()=>{
+    if (document.getElementById('dueDate').value && document.getElementById('title').value.length-1) return document.getElementById('add').disabled = false;
+    return document.getElementById('add').disabled =true;
+})
+
+document.getElementById('dueDate').addEventListener('change',()=>{
+    if (document.getElementById('title').value.length-1>0) return document.getElementById('add').disabled = false;
+    return document.getElementById('add').disabled =true;
+})
+
+document.getElementById('sortTodo').addEventListener('change',()=>{
+    let filterVal = document.getElementById('sortTodo').value;
+    let listItems = document.getElementById('taskList')
+    let newList = []
+    if (todoTasks.length) {
+        while (listItems.firstChild) {
+            listItems.removeChild(listItems.firstChild)
+        }
+        switch (filterVal) {
+            case '1':
+                let sortedByTitle = todoTasks.sort((a, b) => a.title.localeCompare(b.title));
+                for (let i = 0; i < sortedByTitle.length; i++) {
+                    newList.push(sortedByTitle[i])
+                    let newLi =document.createElement('li');
+                        newLi.innerHTML =updateLi(sortedByTitle[i].title, sortedByTitle[i].dateDue, sortedByTitle[i].description) 
+                        document.getElementById('taskList').appendChild(newLi);
+                }
+                break;
+            case '2':
+                let sortedByDuedate = todoTasks.sort((a, b) => a.dateDue.localeCompare(b.dateDue));
+                for (let i = 0; i < sortedByDuedate.length; i++) {
+                    newList.push(sortedByDuedate[i])
+                    let newLi =document.createElement('li');
+                        newLi.innerHTML = updateLi(sortedByDuedate[i].title, sortedByDuedate[i].dateDue, sortedByDuedate[i].description);
+                        document.getElementById('taskList').appendChild(newLi);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    else{
+        console.log('eliii');
+    }
+})
+
+document.getElementById('filterTodo').addEventListener('keyup', (ev)=>{
+
+    let filteredList = todoTasks.filter(el=>el.title.includes(ev.target.value));
+    let listItems = document.getElementById('taskList')
+    
+    if (!filteredList.length) {
+        listItems.removeChild(listItems.firstChild)
+        document.getElementById('emptyList').classList.add('d-block');
+        document.getElementById('emptyList').classList.remove('d-none');
+    }
+   else{
+        while (listItems.firstChild) {
+            listItems.removeChild(listItems.firstChild)
+        }
+        for (let i = 0; i < filteredList.length; i++) {
+            let newLi =document.createElement('li');
+                newLi.innerHTML = updateLi(filteredList[i].title, filteredList[i].dateDue, filteredList[i].description)
+                document.getElementById('taskList').appendChild(newLi);   
+                document.getElementById('emptyList').classList.add('d-none');
+        }
+   }
+   
+
+})
+
 document.getElementById('dueDate').setAttribute('min', new Date().toISOString().split("T")[0])
