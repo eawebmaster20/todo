@@ -67,3 +67,5 @@ function clearInput() {
     document.getElementById('dueDate').value='';
     document.getElementById('description').value='';
 }
+
+document.getElementById('dueDate').setAttribute('min', new Date().toISOString().split("T")[0])
