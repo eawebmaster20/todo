@@ -1,0 +1,31 @@
+.btn-icon{
+    width: 13px;
+}
+
+ul>li{
+    list-style-type: none
+}
+
+.todo-item{
+    color: blue;
+}
+
+.editbtn{
+    visibility: hidden;
+}
+
+.todo-item :hover .editbtn{
+    visibility: visible;
+}
+
+.task-desc{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.todo-item :hover .task-desc {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+}
