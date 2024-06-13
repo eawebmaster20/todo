@@ -61,3 +61,9 @@ const updateTodo = (el)=>{
     document.getElementById(inEditModeId).firstElementChild.firstElementChild.childNodes[5].textContent = document.getElementById('description').value
     todoTasks[inEditModeId].description = document.getElementById('description').value
 }
+
+function clearInput() {
+    document.getElementById('title').value='';
+    document.getElementById('dueDate').value='';
+    document.getElementById('description').value='';
+}
