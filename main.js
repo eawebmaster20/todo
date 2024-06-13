@@ -139,5 +139,15 @@ document.getElementById('filterTodo').addEventListener('keyup', (ev)=>{
    
 
 })
-
+const toggleComplete = (el)=>{
+    if (el.firstElementChild.checked) {
+    console.log(el.parentNode.parentNode.firstElementChild.innerHTML);
+    el.parentNode.parentNode.firstElementChild.innerHTML= `<del class="text-muted">${el.parentNode.parentNode.firstElementChild.textContent}</del>`
+    }
+    else{
+        
+    console.log(el.parentNode.parentNode.firstElementChild.innerHTML);
+    el.parentNode.parentNode.firstElementChild.innerHTML= el.parentNode.parentNode.firstElementChild.textContent
+    }
+}
 document.getElementById('dueDate').setAttribute('min', new Date().toISOString().split("T")[0])
