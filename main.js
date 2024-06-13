@@ -34,3 +34,30 @@ const updateLi = (title, dateDue, description)=>{
             
         </div>`
 }
+
+const deleteTask = (el)=>{
+    let index = el.parentNode.parentNode.parentNode.parentNode.id;
+    todoTasks.splice(index, 1);
+    el.parentNode.parentNode.parentNode.parentNode.remove()
+}
+
+const editTask = (el)=>{
+    let index = el.parentNode.parentNode.parentNode.parentNode.id;
+    inEditModeId = index;
+    document.getElementById('add').classList.add('d-none')
+    document.getElementById('updateExisting').classList.remove('d-none')
+    document.getElementById('title').value= todoTasks[index].title;
+    document.getElementById('dueDate').value = todoTasks[index].dateDue;
+    document.getElementById('description').value = todoTasks[index].description;
+}
+
+const updateTodo = (el)=>{
+    let index = el.parentNode.parentNode.parentNode.parentNode.id;
+    console.log(inEditModeId);
+    document.getElementById(inEditModeId).firstElementChild.firstElementChild.firstElementChild.textContent = document.getElementById('title').value
+    todoTasks[inEditModeId].title = document.getElementById('title').value
+    document.getElementById(inEditModeId).firstElementChild.firstElementChild.childNodes[3].textContent = document.getElementById('dueDate').value
+    todoTasks[inEditModeId].dateDue = document.getElementById('dueDate').value
+    document.getElementById(inEditModeId).firstElementChild.firstElementChild.childNodes[5].textContent = document.getElementById('description').value
+    todoTasks[inEditModeId].description = document.getElementById('description').value
+}
